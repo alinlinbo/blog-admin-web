@@ -92,7 +92,7 @@
     base: '../../layuiadmin/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
-  }).use(['index', 'user'], function(){
+  }).use(['index', 'user','req'], function(){
     var $ = layui.$
     ,setter = layui.setter
     ,admin = layui.admin
@@ -104,34 +104,23 @@
 
     //提交
     form.on('submit(LAY-user-login-submit)', function(obj){
-
-      //请求登入接口
-      admin.req({
+      layui.req({
         method:'post',
-        url: layui.setter.baseUrl + 'login'
-        ,data: JSON.stringify(obj.field),
-        contentType:'application/json'
-        ,done: function(res){
-            localStorage.setItem('token',res.data)
-            layer.msg('登入成功', {
-              offset: '15px'
-              ,icon: 1
-              ,time: 1000
-            }, function(){
-              location.href = '../'; //后台主页
-            });
+        url: 'login'
+        ,data: obj.field
+        ,success: function(res){
+          localStorage.setItem('token',res.data)
+          layer.msg('登入成功', {
+            offset: '15px'
+            ,icon: 1
+            ,time: 1000
+          }, function(){
+            location.href = '../'; //后台主页
+          });
         }
-      });
+      })
 
     });
-
-
-    //实际使用时记得删除该代码
-    layer.msg('为了方便演示，用户名密码可随意输入', {
-      offset: '15px'
-      ,icon: 1
-    });
-
   });
   </script>
 </body>
