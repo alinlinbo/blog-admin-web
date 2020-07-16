@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/login.css" media="all">
+  <script src="../../layuiadmin/layui/layui.js"></script>
 </head>
 <body>
 
@@ -86,7 +87,6 @@
 
   </div>
 
-  <script src="../../layuiadmin/layui/layui.js"></script>
   <script>
   layui.config({
     base: '../../layuiadmin/' //静态资源所在路径
@@ -104,7 +104,7 @@
 
     //提交
     form.on('submit(LAY-user-login-submit)', function(obj){
-      layui.req({
+      layui.$.ajax({
         method:'post',
         url: 'login'
         ,data: obj.field

@@ -61,7 +61,7 @@
           <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
           <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
         </div>
-        <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table> 
+        <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table>
         <script type="text/html" id="buttonTpl">
           {{#  if(d.status){ }}
             <button class="layui-btn layui-btn-xs">已发布</button>
@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <script src="../../../layuiadmin/layui/layui.js"></script>  
+  <script src="../../../layuiadmin/layui/layui.js"></script>
   <script>
   layui.config({
     base: '../../../layuiadmin/' //静态资源所在路径
@@ -86,17 +86,17 @@
   }).use(['index', 'contlist', 'table'], function(){
     var table = layui.table
     ,form = layui.form;
-    
+
     //监听搜索
     form.on('submit(LAY-app-contlist-search)', function(data){
       var field = data.field;
-      
+
       //执行重载
       table.reload('LAY-app-content-list', {
         where: field
       });
     });
-    
+
     var $ = layui.$, active = {
       batchdel: function(){
         var checkStatus = table.checkStatus('LAY-app-content-list')
@@ -105,9 +105,9 @@
         if(checkData.length === 0){
           return layer.msg('请选择数据');
         }
-      
+
         layer.confirm('确定删除吗？', function(index) {
-          
+
           //执行 Ajax 后重载
           /*
           admin.req({
@@ -123,7 +123,7 @@
         layer.open({
           type: 2
           ,title: '添加文章'
-          ,content: 'listform.html'
+          ,content: 'listform.html?id=123'
           ,maxmin: true
           ,area: ['550px', '550px']
           ,btn: ['确定', '取消']
@@ -132,9 +132,9 @@
             var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-submit");
             submit.click();
           }
-        }); 
+        });
       }
-    }; 
+    };
 
     $('.layui-btn.layuiadmin-btn-list').on('click', function(){
       var type = $(this).data('type');
