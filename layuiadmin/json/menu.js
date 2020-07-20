@@ -222,6 +222,6 @@
     "name": "get"
     ,"title": "授权"
     ,"icon": "layui-icon-auz"
-    ,"jump": "system/get"
+    ,"jump": "elem/get"
   }]
 }

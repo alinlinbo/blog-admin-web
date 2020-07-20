@@ -3,7 +3,10 @@
     setter: "config",
     admin: "lib/admin",
     view: "lib/view",
-    req: 'ajax'
+    req: 'ajax',
+    tableEdit:'tableEdit'
+    ,tableTree:'tableTree',
+    tinymce:'tinymce',
 }).define(["setter", "admin"], function (a) {
     var e = layui.setter, i = layui.element, n = layui.admin, t = n.tabsPage, d = layui.view, l = function (a, d) {
         var l, b = r("#LAY_app_tabsheader>li"), y = a.replace(/(^http(s*):)|(\?[\s\S]*$)/g, "");

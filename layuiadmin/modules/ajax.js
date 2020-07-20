@@ -4,12 +4,17 @@ layui.define(['index','form'],function (exports) {
             Authorization: "Bearer "+localStorage.getItem('token')
         },
         beforeSend : function(xhr, params) { // 发送请求前触发
-            params.url = layui.setter.baseUrl+params.url
-            if (!params.contentType){
-                params.contentType = 'application/json' //参数格式指定application/jaon
+            if (params.url.includes('/tinymce.js')){
+                return
             }
-            if (params.contentType==='application/json'||params.contentType==='json'){
-                params.data = JSON.stringify(params.data)   //JSON.stringify()将它转化为json字符串
+            params.url = layui.setter.baseUrl+params.url
+            if (!params.url.includes('upload')){  //上传文件不需要处理contentType
+                if (!params.contentType){
+                    params.contentType = 'application/json' //参数格式指定application/jaon
+                }
+                if (params.contentType==='application/json'||params.contentType==='json'){
+                    params.data = JSON.stringify(params.data)   //JSON.stringify()将它转化为json字符串
+                }
             }
             if (params.success){
                 const  originSuc = params.success
@@ -21,19 +26,19 @@ layui.define(['index','form'],function (exports) {
                     }
                 }
             }
-            const originError = params.error
-            params.error = function (res) {
-                console.log('错误信息',res)
-                if (res.status === 401){
-                    layer.msg('登录验证已过期，即将跳转到登录页面', {
-                        time: 1000
-                    },function(){
-                        window.parent.parent.location.href =window.origin+ "/blog-admin-web/views/user/login.html"
-                    });
-                } else {
-                    layer.msg('错误码：'+res.status+"，错误信息："+res.statusText)
+            if (!params.error){
+                params.error = function (res) {
+                    console.log('错误信息',res)
+                    if (res.status === 401){
+                        layer.msg('登录验证已过期，即将跳转到登录页面', {
+                            time: 1000
+                        },function(){
+                            window.parent.parent.location.href =window.origin+ "/blog-admin-web/views/user/login.html"
+                        });
+                    } else {
+                        layer.msg('错误码：'+res.status+"，错误信息："+res.statusText)
+                    }
                 }
-                originError(res)
             }
         },
     });

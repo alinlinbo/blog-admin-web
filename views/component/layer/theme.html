@@ -34,28 +34,28 @@
         <div class="layui-card">
           <div class="layui-card-header">风格定制</div>
           <div class="layui-card-body">
-            
+
             <div class="layui-btn-container layadmin-layer-demo">
               <button data-type="test1" class="layui-btn layui-btn-primary">layuiAdmin风格</button>
               <button data-type="test2" class="layui-btn layui-btn-primary">右侧呼出</button>
             </div>
-            
+
           </div>
         </div>
       </div>
       <div class="layui-col-md12">
         <div class="layui-card">
           <div class="layui-card-body">
-            
+
             持续增加中
-            
+
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="../../../layuiadmin/layui/layui.js"></script>  
+  <script src="../../../layuiadmin/layui/layui.js"></script>
   <script>
   layui.config({
     base: '../../../layuiadmin/' //静态资源所在路径
@@ -68,7 +68,7 @@
     ,router = layui.router();
 
     element.render();
-    
+
     var active = {
       test1: function(){
         admin.popup({
@@ -86,12 +86,12 @@
           id: 'LAY_adminPopupLayerTest'
           ,success: function(){
             $('#'+ this.id).html('<div style="padding: 20px;">放入内容</div>');
-            //admin.view(this.id).render('system/xxx')
+            //admin.view(this.id).render('elem/xxx')
           }
         });
       }
     };
-    
+
     $('#LAY-component-layer-theme .layadmin-layer-demo .layui-btn').on('click', function(){
       var type = $(this).data('type');
       active[type] && active[type].call(this);
